@@ -10,32 +10,20 @@
             </button>
         </div>
 
-        <!-- Rediseño del área de búsqueda y filtro -->
         <div class="mb-6 flex flex-col sm:flex-row gap-4 sm:items-center">
             <div class="w-full sm:flex-1">
-                <input 
-                    type="text" 
-                    v-model="search" 
-                    placeholder="Buscar por nombre"
+                <input type="text" v-model="search" placeholder="Buscar por nombre"
                     class="w-full text-base px-4 py-2 border border-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                    aria-label="Buscador" 
-                />
+                    aria-label="Buscador" />
             </div>
 
             <div class="w-full sm:w-auto">
                 <label for="regionSelect" class="sr-only">Filtrar por categorias</label>
-                <select 
-                    id="regionSelect" 
-                    v-model="selectedCategories"
-                    class="w-full sm:w-48 px-4 py-2 bg-white text-black border border-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
-                >
+                <select id="regionSelect" v-model="selectedCategories"
+                    class="w-full sm:w-48 px-4 py-2 bg-white text-black border border-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
                     <option value="">Todas las categorias</option>
-                    <option 
-                        v-for="categoria in props.categories" 
-                        :key="categoria.id" 
-                        :value="categoria.id" 
-                        class="text-black"
-                    >
+                    <option v-for="categoria in props.categories" :key="categoria.id" :value="categoria.id"
+                        class="text-black">
                         {{ categoria.nom }}
                     </option>
                 </select>
@@ -61,14 +49,13 @@
                             <div class="flex space-x-3">
                                 <Link :href="route('anuncis.show', anunci.id)"
                                     class="text-green-800 hover:text-indigo-900">
-                                    Ver
+                                Ver
                                 </Link>
                                 <Link :href="route('anuncis.edit', anunci.id)"
                                     class="text-blue-600 hover:text-blue-900">
-                                    Editar
+                                Editar
                                 </Link>
-                                <button @click="DeleteAnunci(anunci.id)"
-                                    class="text-red-600 hover:text-red-900">
+                                <button @click="DeleteAnunci(anunci.id)" class="text-red-600 hover:text-red-900">
                                     Eliminar
                                 </button>
                             </div>
@@ -92,7 +79,7 @@ import Cookies from "@/components/Cookies.vue";
 const props = defineProps({
     anuncis: Array,
     categories: Array,
-    filters: Object 
+    filters: Object
 });
 
 console.log('Categories:', props.categories);
