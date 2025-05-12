@@ -33,6 +33,7 @@ function validarContrasena(password: string): boolean {
     if (!/[A-Z]/.test(password)) return false;
     if (!/[0-9]/.test(password)) return false;
     if (!/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>]/.test(password)) return false;
+    if (password.includes(' ')) return false;
     return true;
 }
 

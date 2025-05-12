@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="email" class="block mb-1">Descripción:</label>
+                    <label for="email" class="block mb-1">Correu Electrònic:</label>
                     <input type="email" id="email" v-model="form.email" class="w-full border p-2 rounded"
                         required />
                 </div>

@@ -10,21 +10,38 @@
             </button>
         </div>
 
+        <!-- Rediseño del área de búsqueda y filtro -->
+        <div class="mb-6 flex flex-col sm:flex-row gap-4 sm:items-center">
+            <div class="w-full sm:flex-1">
+                <input 
+                    type="text" 
+                    v-model="search" 
+                    placeholder="Buscar por nombre"
+                    class="w-full text-base px-4 py-2 border border-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    aria-label="Buscador" 
+                />
+            </div>
 
-        <div class="mb-6 flex items-center space-x-4">
-            <input type="text" v-model="search" placeholder="Buscar por nombre"
-                class="flex-grow text-base px-6 py-3 border border-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                aria-label="Buscador" />
-
-            <label for="regionSelect" class="sr-only">Filtrar por categorias</label>
-            <select id="regionSelect" v-model="selectedCategories"
-                class="w-48 px-4 py-2 bg-white text-gray-900 border border-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
-                <option value="" class="text-gray-900">Todas las categorias</option>
-                <option v-for="categoria in categories" :key="categoria.id" :value="categoria.id" class="text-gray-900">
-                    {{ categoria.titol }}
-                </option>
-            </select>
+            <div class="w-full sm:w-auto">
+                <label for="regionSelect" class="sr-only">Filtrar por categorias</label>
+                <select 
+                    id="regionSelect" 
+                    v-model="selectedCategories"
+                    class="w-full sm:w-48 px-4 py-2 bg-white text-black border border-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                >
+                    <option value="">Todas las categorias</option>
+                    <option 
+                        v-for="categoria in props.categories" 
+                        :key="categoria.id" 
+                        :value="categoria.id" 
+                        class="text-black"
+                    >
+                        {{ categoria.nom }}
+                    </option>
+                </select>
+            </div>
         </div>
+
         <div class="overflow-x-auto bg-white rounded-lg shadow">
             <table class="min-w-full divide-y divide-gray-200">
                 <thead>
@@ -61,6 +78,8 @@
             </table>
         </div>
     </div>
+    <Cookies />
+
 </template>
 
 <script setup>
@@ -68,12 +87,15 @@ import { Head, Link, router } from '@inertiajs/vue3';
 import { ref, defineProps, watch } from 'vue';
 import NavBar from '@/components/NavBar.vue';
 import axios from 'axios';
+import Cookies from "@/components/Cookies.vue";
 
 const props = defineProps({
     anuncis: Array,
     categories: Array,
     filters: Object 
 });
+
+console.log('Categories:', props.categories);
 
 const search = ref(props.filters?.search || '');
 const selectedCategories = ref(props.filters?.categoria || '');
